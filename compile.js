@@ -7,7 +7,9 @@ const source = fs.readFileSync(myContractPath, 'utf8')
 const input = {
     language: 'Solidity',
     sources: {
-      'example.sol': source
+      'example.sol': {
+        content: source
+      }
     },
     settings: {
       outputSelection: {
@@ -19,12 +21,14 @@ const input = {
   };
   
   const output = JSON.parse(solc.compile(JSON.stringify(input)));
-  
-  // `output` here contains the JSON output as specified in the documentation
-  for (const contractName in output.contracts['example.sol']) {
-    console.log(
-      contractName +
-        ': ' +
-        output.contracts['example.sol'][contractName].evm.bytecode.object
-    );
-  }
+  // console.log(output)
+  // // `output` here contains the JSON output as specified in the documentation
+  // for (const contractName in output.contracts['example.sol']) {
+  //   console.log(
+  //     contractName +
+  //       ': ' +
+  //       output.contracts['example.sol'][contractName].evm.bytecode.object
+  //   )
+  // }
+
+module.exports = output.contracts['example.sol']['SimpleAuction']
