@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const solc = require('solc');
+
 const myContractPath = path.resolve(__dirname, 'contracts', 'example.sol')
 const source = fs.readFileSync(myContractPath, 'utf8')
 
@@ -20,6 +21,7 @@ const input = {
     }
   };
   
+  
   const output = JSON.parse(solc.compile(JSON.stringify(input)));
   // console.log(output)
   // // `output` here contains the JSON output as specified in the documentation
@@ -31,4 +33,4 @@ const input = {
   //   )
   // }
 
-module.exports = output.contracts['example.sol']['SimpleAuction']
+module.exports = output.contracts['example.sol'].SimpleAuction
